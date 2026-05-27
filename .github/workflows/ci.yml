@@ -57,4 +57,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      
+      - uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
