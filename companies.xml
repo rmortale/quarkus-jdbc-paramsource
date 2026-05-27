@@ -1,0 +1,13 @@
+<company>
+	<bucket>testbucket</bucket>
+	<name>visaappid.txt</name>
+	<address>
+		<street>2788 Kingscliffe Circle</street>
+		<city>Richmond County</city>
+		<state>Delaware</state>
+		<zip>WA03642</zip>
+	</address>
+	<ceo>Tristan Coulter-Whited</ceo>
+	<dateCreated>2003-07-13</dateCreated>
+</company>
+	
