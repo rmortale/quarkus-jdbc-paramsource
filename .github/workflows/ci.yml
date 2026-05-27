@@ -26,6 +26,7 @@ jobs:
           tags: |
             type=ref,event=branch
             type=sha,prefix={{branch}}-
+            type=sha
 
       - name: Set up JDK
         uses: actions/setup-java@v5
@@ -35,7 +36,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn -ntp -q --batch-mode clean package
+        run: mvn -ntp -q --batch-mode clean package -Dquarkus.container-image.tag=sha-${GITHUB_SHA::7}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
