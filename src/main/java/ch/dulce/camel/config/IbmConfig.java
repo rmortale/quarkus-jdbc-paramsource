@@ -1,5 +1,6 @@
 package ch.dulce.camel.config;
 
+import ch.dulce.camel.config.repo.ParamSource;
 import com.ibm.mq.jakarta.jms.MQConnectionFactory;
 import com.ibm.msg.client.jakarta.wmq.WMQConstants;
 import io.smallrye.common.annotation.Identifier;

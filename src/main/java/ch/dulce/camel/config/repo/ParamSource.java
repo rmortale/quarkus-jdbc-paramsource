@@ -1,6 +1,5 @@
-package ch.dulce.camel.config;
+package ch.dulce.camel.config.repo;
 
-import ch.dulce.camel.config.repo.ConfigRepo;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.camel.spi.RouteTemplateParameterSource;

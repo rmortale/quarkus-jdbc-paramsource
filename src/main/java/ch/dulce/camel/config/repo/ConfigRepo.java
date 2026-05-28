@@ -1,6 +1,5 @@
 package ch.dulce.camel.config.repo;
 
-import ch.dulce.camel.config.ParamConfig;
 import io.quarkiverse.fluentjdbc.runtime.RecordMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
