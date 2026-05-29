@@ -40,7 +40,7 @@
               }
             }
           } ],
-          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-519ee7d",
+          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-840b1d6",
           "imagePullPolicy" : "Always",
           "name" : "quarkus-jdbc-paramsource"
         } ],
