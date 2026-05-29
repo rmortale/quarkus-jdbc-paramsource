@@ -51,6 +51,7 @@ jobs:
       - name: Build image and push
         uses: docker/build-push-action@v7
         with:
+          platforms: linux/amd64,linux/arm64
           context: .
           file: src/main/docker/Dockerfile.jvm
           push: true
