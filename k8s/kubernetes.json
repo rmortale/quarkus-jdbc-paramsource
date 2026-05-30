@@ -40,7 +40,12 @@
               }
             }
           } ],
-          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-840b1d6",
+          "envFrom" : [ {
+            "secretRef" : {
+              "name" : "postgres-secret"
+            }
+          } ],
+          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:1.0.0-SNAPSHOT",
           "imagePullPolicy" : "Always",
           "name" : "quarkus-jdbc-paramsource"
         } ],
