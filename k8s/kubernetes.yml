@@ -33,8 +33,10 @@ spec:
             - secretRef:
                 name: artemis-secret
             - secretRef:
+                name: ibmmq-secret
+            - secretRef:
                 name: postgres-secret
-          image: ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-dfe2ddb
+          image: ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-19e571a
           imagePullPolicy: Always
           name: quarkus-jdbc-paramsource
       terminationGracePeriodSeconds: 10
