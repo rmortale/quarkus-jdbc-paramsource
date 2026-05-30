@@ -45,7 +45,7 @@
               "name" : "postgres-secret"
             }
           } ],
-          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:1.0.0-SNAPSHOT",
+          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-c55e802",
           "imagePullPolicy" : "Always",
           "name" : "quarkus-jdbc-paramsource"
         } ],
