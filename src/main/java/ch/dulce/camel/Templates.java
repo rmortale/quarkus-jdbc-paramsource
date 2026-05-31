@@ -11,6 +11,14 @@ public class Templates extends EndpointRouteBuilder {
   private static final String CACHE_LEVEL_NAME = "CACHE_CONSUMER";
   private static final String DEFAULT_MAX_CONSUMERS = "10";
   private static final String DEFAULT_JMS_CONNECTION_FACTORY = "<default>";
+  private static final String IN_CONNECTION_FACTORY = "inConnectionFactory";
+  private static final String OUT_CONNECTION_FACTORY = "outConnectionFactory";
+  private static final String WRAPBODY_TRANSFORMATION = "wrapbodyTransformation";
+  private static final String MAX_CONSUMERS = "maxConsumers";
+  private static final String INQUEUE = "inqueue";
+  private static final String OUTQUEUE = "outqueue";
+  private static final String UPPERCASE_TRANSFORMATION = "uppercaseTransformation";
+  private static final String EXTRACT_BODY_TRANSFORMATION = "extractBodyTransformation";
 
   private static final String MESSAGE = """
       <object>
@@ -22,54 +30,57 @@ public class Templates extends EndpointRouteBuilder {
       </object>
       """;
 
+
+
   @Override
   public void configure() throws Exception {
 
-    routeTemplate("wrapbodyTransformation")
-        .templateParameter("inqueue")
-        .templateParameter("outqueue")
-        .templateParameter("inConnectionFactory", DEFAULT_JMS_CONNECTION_FACTORY)
-        .templateParameter("outConnectionFactory", DEFAULT_JMS_CONNECTION_FACTORY)
-        .templateParameter("maxConsumers", DEFAULT_MAX_CONSUMERS)
-        .from(jms("{{inqueue}}")
+
+    routeTemplate(WRAPBODY_TRANSFORMATION)
+        .templateParameter(INQUEUE)
+        .templateParameter(OUTQUEUE)
+        .templateParameter(IN_CONNECTION_FACTORY, DEFAULT_JMS_CONNECTION_FACTORY)
+        .templateParameter(OUT_CONNECTION_FACTORY, DEFAULT_JMS_CONNECTION_FACTORY)
+        .templateParameter(MAX_CONSUMERS, DEFAULT_MAX_CONSUMERS)
+        .from(jms("{{%s}}".formatted(INQUEUE))
           .transacted(true)
           .cacheLevelName(CACHE_LEVEL_NAME)
-          .maxConcurrentConsumers("{{maxConsumers}}").connectionFactory("{{inConnectionFactory}}")
+          .maxConcurrentConsumers("{{%s}}".formatted(MAX_CONSUMERS)).connectionFactory("{{%s}}".formatted(IN_CONNECTION_FACTORY))
           .advanced().lazyCreateTransactionManager(false))
         .transform().simple(MESSAGE)
-        .log(LoggingLevel.DEBUG, "wrapbodyTransformation", "${body}")
-        .to(jms("{{outqueue}}").connectionFactory("{{outConnectionFactory}}"));
+        .log(LoggingLevel.DEBUG, WRAPBODY_TRANSFORMATION, "${body}")
+        .to(jms("{{%s}}".formatted(OUTQUEUE)).connectionFactory("{{%s}}".formatted(OUT_CONNECTION_FACTORY)));
 
-    routeTemplate("uppercaseTransformation")
-        .templateParameter("inqueue")
-        .templateParameter("outqueue")
-        .templateParameter("inConnectionFactory", DEFAULT_JMS_CONNECTION_FACTORY)
-        .templateParameter("outConnectionFactory", DEFAULT_JMS_CONNECTION_FACTORY)
-        .templateParameter("maxConsumers", DEFAULT_MAX_CONSUMERS)
-        .from(jms("{{inqueue}}")
+    routeTemplate(UPPERCASE_TRANSFORMATION)
+        .templateParameter(INQUEUE)
+        .templateParameter(OUTQUEUE)
+        .templateParameter(IN_CONNECTION_FACTORY, DEFAULT_JMS_CONNECTION_FACTORY)
+        .templateParameter(OUT_CONNECTION_FACTORY, DEFAULT_JMS_CONNECTION_FACTORY)
+        .templateParameter(MAX_CONSUMERS, DEFAULT_MAX_CONSUMERS)
+        .from(jms("{{%s}}".formatted(INQUEUE))
             .transacted(true)
             .cacheLevelName(CACHE_LEVEL_NAME)
-            .maxConcurrentConsumers("{{maxConsumers}}").connectionFactory("{{inConnectionFactory}}")
+            .maxConcurrentConsumers("{{%s}}".formatted(MAX_CONSUMERS)).connectionFactory("{{%s}}".formatted(IN_CONNECTION_FACTORY))
             .advanced().lazyCreateTransactionManager(false))
         .transform().simple("${uppercase()}")
-        .log(LoggingLevel.DEBUG, "uppercaseTransformation", "${body}")
-        .to(jms("{{outqueue}}").connectionFactory("{{outConnectionFactory}}"));
+        .log(LoggingLevel.DEBUG, UPPERCASE_TRANSFORMATION, "${body}")
+        .to(jms("{{%s}}".formatted(OUTQUEUE)).connectionFactory("{{%s}}".formatted(OUT_CONNECTION_FACTORY)));
 
-    routeTemplate("extractBodyTransformation")
-        .templateParameter("inqueue")
-        .templateParameter("outqueue")
+    routeTemplate(EXTRACT_BODY_TRANSFORMATION)
+        .templateParameter(INQUEUE)
+        .templateParameter(OUTQUEUE)
         .templateParameter("splitExpr")
-        .templateParameter("inConnectionFactory", DEFAULT_JMS_CONNECTION_FACTORY)
-        .templateParameter("outConnectionFactory", DEFAULT_JMS_CONNECTION_FACTORY)
-        .templateParameter("maxConsumers", DEFAULT_MAX_CONSUMERS)
-        .from(jms("{{inqueue}}")
+        .templateParameter(IN_CONNECTION_FACTORY, DEFAULT_JMS_CONNECTION_FACTORY)
+        .templateParameter(OUT_CONNECTION_FACTORY, DEFAULT_JMS_CONNECTION_FACTORY)
+        .templateParameter(MAX_CONSUMERS, DEFAULT_MAX_CONSUMERS)
+        .from(jms("{{%s}}".formatted(INQUEUE))
             .transacted(true)
             .cacheLevelName(CACHE_LEVEL_NAME)
-            .maxConcurrentConsumers("{{maxConsumers}}").connectionFactory("{{inConnectionFactory}}")
+            .maxConcurrentConsumers("{{%s}}".formatted(MAX_CONSUMERS)).connectionFactory("{{%s}}".formatted(IN_CONNECTION_FACTORY))
             .advanced().lazyCreateTransactionManager(false))
         .split().xtokenize("{{splitExpr}}", 'u', new Namespaces())
-        .log(LoggingLevel.DEBUG, "extractBodyTransformation", "${body}")
-        .to(jms("{{outqueue}}").connectionFactory("{{outConnectionFactory}}"));
+        .log(LoggingLevel.DEBUG, EXTRACT_BODY_TRANSFORMATION, "${body}")
+        .to(jms("{{%s}}".formatted(OUTQUEUE)).connectionFactory("{{%s}}".formatted(OUT_CONNECTION_FACTORY)));
   }
 
 }
