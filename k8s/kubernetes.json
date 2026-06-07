@@ -1,0 +1,79 @@
+[{
+  "apiVersion" : "apps/v1",
+  "kind" : "Deployment",
+  "metadata" : {
+    "annotations" : {
+      "app.quarkus.io/quarkus-version" : "3.35.2",
+      "app.quarkus.io/vcs-uri" : "https://github.com/rmortale/quarkus-jdbc-paramsource.git"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "quarkus-jdbc-paramsource",
+      "app.kubernetes.io/managed-by" : "quarkus"
+    },
+    "name" : "quarkus-jdbc-paramsource"
+  },
+  "spec" : {
+    "replicas" : 1,
+    "selector" : {
+      "matchLabels" : {
+        "app.kubernetes.io/name" : "quarkus-jdbc-paramsource"
+      }
+    },
+    "template" : {
+      "metadata" : {
+        "annotations" : {
+          "app.quarkus.io/quarkus-version" : "3.35.2",
+          "app.quarkus.io/vcs-uri" : "https://github.com/rmortale/quarkus-jdbc-paramsource.git"
+        },
+        "labels" : {
+          "app.kubernetes.io/managed-by" : "quarkus",
+          "app.kubernetes.io/name" : "quarkus-jdbc-paramsource"
+        }
+      },
+      "spec" : {
+        "containers" : [ {
+          "env" : [ {
+            "name" : "KUBERNETES_NAMESPACE",
+            "valueFrom" : {
+              "fieldRef" : {
+                "fieldPath" : "metadata.namespace"
+              }
+            }
+          }, {
+            "name" : "SMALLRYE_CONFIG_LOCATIONS",
+            "value" : "/mnt/app-config-map"
+          } ],
+          "envFrom" : [ {
+            "secretRef" : {
+              "name" : "artemis-secret"
+            }
+          }, {
+            "secretRef" : {
+              "name" : "ibmmq-secret"
+            }
+          }, {
+            "secretRef" : {
+              "name" : "postgres-secret"
+            }
+          } ],
+          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-5601081",
+          "imagePullPolicy" : "Always",
+          "name" : "quarkus-jdbc-paramsource",
+          "volumeMounts" : [ {
+            "mountPath" : "/mnt/app-config-map",
+            "name" : "app-config-map",
+            "readOnly" : false
+          } ]
+        } ],
+        "terminationGracePeriodSeconds" : 10,
+        "volumes" : [ {
+          "configMap" : {
+            "name" : "quarkus-jdbc-paramsource-config",
+            "optional" : false
+          },
+          "name" : "app-config-map"
+        } ]
+      }
+    }
+  }
+}]
