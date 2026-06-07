@@ -56,7 +56,7 @@
               "name" : "postgres-secret"
             }
           } ],
-          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-01a5509",
+          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-ac0f53b",
           "imagePullPolicy" : "Always",
           "name" : "quarkus-jdbc-paramsource",
           "volumeMounts" : [ {
