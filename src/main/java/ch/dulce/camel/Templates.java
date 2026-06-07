@@ -78,7 +78,7 @@ public class Templates extends EndpointRouteBuilder {
             .cacheLevelName(CACHE_LEVEL_NAME)
             .maxConcurrentConsumers("{{%s}}".formatted(MAX_CONSUMERS)).connectionFactory("{{%s}}".formatted(IN_CONNECTION_FACTORY))
             .advanced().lazyCreateTransactionManager(false))
-        .split().xtokenize("{{splitExpr}}", 'u', new Namespaces())
+        .split().xtokenize("{{splitExpr}}", 'i', new Namespaces())
         .log(LoggingLevel.DEBUG, EXTRACT_BODY_TRANSFORMATION, "${body}")
         .to(jms("{{%s}}".formatted(OUTQUEUE)).connectionFactory("{{%s}}".formatted(OUT_CONNECTION_FACTORY)));
   }
