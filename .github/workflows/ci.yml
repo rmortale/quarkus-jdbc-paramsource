@@ -3,7 +3,7 @@ name: on push
 on:
   push:
     paths-ignore:
-      - "chart/**"
+      - "k8s/**"
 
 env:
   REGISTRY: ghcr.io
