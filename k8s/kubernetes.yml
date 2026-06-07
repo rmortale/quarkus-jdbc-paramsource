@@ -29,6 +29,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: SMALLRYE_CONFIG_LOCATIONS
+              value: /mnt/app-config-map
           envFrom:
             - secretRef:
                 name: artemis-secret
@@ -36,7 +38,16 @@ spec:
                 name: ibmmq-secret
             - secretRef:
                 name: postgres-secret
-          image: ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-c8c9bf4
+          image: ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-fe283a9
           imagePullPolicy: Always
           name: quarkus-jdbc-paramsource
+          volumeMounts:
+            - mountPath: /mnt/app-config-map
+              name: app-config-map
+              readOnly: false
       terminationGracePeriodSeconds: 10
+      volumes:
+        - configMap:
+            name: quarkus-jdbc-paramsource-config
+            optional: false
+          name: app-config-map
