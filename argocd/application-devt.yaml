@@ -11,8 +11,6 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: k8s
-    directory:
-      include: '{kubernetes.yml,config-devt.yml}'
+    path: k8s/overlays/devt
     repoURL: https://github.com/rmortale/quarkus-jdbc-paramsource.git
     targetRevision: main

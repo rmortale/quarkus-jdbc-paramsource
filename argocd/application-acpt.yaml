@@ -11,8 +11,15 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: k8s
-    directory:
-      include: '{kubernetes.yml,config-acpt.yml}'
+    path: k8s/overlays/acpt
     repoURL: https://github.com/rmortale/quarkus-jdbc-paramsource.git
     targetRevision: main
+    kustomize:
+      patches:
+        - target:
+            kind: Deployment
+            name: quarkus-jdbc-paramsource
+          patch: |-
+            - op: replace
+              path: /spec/template/spec/containers/0/image
+              value: ghcr.io/rmortale/quarkus-jdbc-paramsource:main-7ca7dd9
