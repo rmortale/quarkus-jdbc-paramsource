@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  application.properties: |
+
+    quarkus.log.category.uppercaseTransformation.level=INFO
+    quarkus.log.category.extractBodyTransformation.level=INFO
+    quarkus.log.category.wrapbodyTransformation.level=INFO
+
+    app.agent.config.id=agent1
+    app.agent.config.version=2.0
+
+kind: ConfigMap
+metadata:
+  name: quarkus-jdbc-paramsource-config-devt
+
+# created by hand

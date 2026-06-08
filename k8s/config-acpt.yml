@@ -6,11 +6,11 @@ data:
     quarkus.log.category.extractBodyTransformation.level=INFO
     quarkus.log.category.wrapbodyTransformation.level=INFO
 
-    app.agent.config.id=agent1
+    app.agent.config.id=agent2
     app.agent.config.version=2.0
 
 kind: ConfigMap
 metadata:
-  name: quarkus-jdbc-paramsource-config
+  name: quarkus-jdbc-paramsource-config-acpt
 
 # created by hand
