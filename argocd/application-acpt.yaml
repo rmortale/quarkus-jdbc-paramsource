@@ -16,7 +16,3 @@ spec:
       include: '{kubernetes.yml,config-acpt.yml}'
     repoURL: https://github.com/rmortale/quarkus-jdbc-paramsource.git
     targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true

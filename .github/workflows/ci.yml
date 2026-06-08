@@ -4,6 +4,7 @@ on:
   push:
     paths-ignore:
       - "k8s/**"
+      - "argocd/**"
 
 env:
   REGISTRY: ghcr.io
