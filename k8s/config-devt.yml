@@ -11,6 +11,6 @@ data:
 
 kind: ConfigMap
 metadata:
-  name: quarkus-jdbc-paramsource-config-devt
+  name: quarkus-jdbc-paramsource-config
 
 # created by hand
