@@ -14,3 +14,7 @@ spec:
     path: k8s/overlays/devt
     repoURL: https://github.com/rmortale/quarkus-jdbc-paramsource.git
     targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

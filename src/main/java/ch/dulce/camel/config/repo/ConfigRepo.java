@@ -3,6 +3,7 @@ package ch.dulce.camel.config.repo;
 import io.quarkiverse.fluentjdbc.runtime.RecordMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.apache.camel.spi.RouteTemplateParameterSource;
 import org.codejargon.fluentjdbc.api.FluentJdbc;
 import org.codejargon.fluentjdbc.api.mapper.Mappers;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -12,7 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class ConfigRepo {
+public class ConfigRepo implements RouteTemplateParameterSource {
 
   private static final String GET_ROUTES_SQL = "select routeid from tpl_config where agentid = ? and config_version = ?";
 
@@ -26,11 +27,13 @@ public class ConfigRepo {
   @Inject
   private FluentJdbc jdbc;
 
-  public Set<String> getAllRouteIds() {
+  @Override
+  public Set<String> routeIds() {
     return jdbc.query().select(GET_ROUTES_SQL).params(agentId, configVersion).setResult(Mappers.singleString());
   }
 
-  public Map<String, Object> getConfig(String routeId) {
+  @Override
+  public Map<String, Object> parameters(String routeId) {
     return jdbc.query().select("select * from tpl_config where routeid = ?")
         .params(routeId)
         .listResult(CONFIG_RECORD_MAPPER)

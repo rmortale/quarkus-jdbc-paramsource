@@ -1,6 +1,6 @@
 package ch.dulce.camel.config;
 
-import ch.dulce.camel.config.repo.ParamSource;
+import ch.dulce.camel.config.repo.ConfigRepo;
 import com.ibm.mq.jakarta.jms.MQConnectionFactory;
 import com.ibm.msg.client.jakarta.wmq.WMQConstants;
 import io.smallrye.common.annotation.Identifier;
@@ -14,7 +14,7 @@ import org.eclipse.microprofile.config.ConfigProvider;
 public class IbmConfig {
 
   @Inject
-  ParamSource paramSource;
+  ConfigRepo paramSource;
 
   @Identifier("ibmConnectionFactory")
   public ConnectionFactory createConnectionFactory() throws JMSException {
