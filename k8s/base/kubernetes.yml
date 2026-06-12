@@ -38,7 +38,7 @@ spec:
                 name: ibmmq-secret
             - secretRef:
                 name: postgres-secret
-          image: ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-9573724
+          image: ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-3107cc5
           imagePullPolicy: Always
           name: quarkus-jdbc-paramsource
           volumeMounts:
