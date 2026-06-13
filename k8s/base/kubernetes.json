@@ -1,4 +1,30 @@
 [{
+  "apiVersion" : "v1",
+  "kind" : "Service",
+  "metadata" : {
+    "annotations" : {
+      "app.quarkus.io/quarkus-version" : "3.35.2",
+      "app.quarkus.io/vcs-uri" : "https://github.com/rmortale/quarkus-jdbc-paramsource.git"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "quarkus-jdbc-paramsource",
+      "app.kubernetes.io/managed-by" : "quarkus"
+    },
+    "name" : "quarkus-jdbc-paramsource"
+  },
+  "spec" : {
+    "ports" : [ {
+      "name" : "http",
+      "port" : 80,
+      "protocol" : "TCP",
+      "targetPort" : 8080
+    } ],
+    "selector" : {
+      "app.kubernetes.io/name" : "quarkus-jdbc-paramsource"
+    },
+    "type" : "ClusterIP"
+  }
+},{
   "apiVersion" : "apps/v1",
   "kind" : "Deployment",
   "metadata" : {
@@ -56,9 +82,50 @@
               "name" : "postgres-secret"
             }
           } ],
-          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-3107cc5",
+          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-92804a9",
           "imagePullPolicy" : "Always",
+          "livenessProbe" : {
+            "failureThreshold" : 3,
+            "httpGet" : {
+              "path" : "/q/health/live",
+              "port" : 8080,
+              "scheme" : "HTTP"
+            },
+            "initialDelaySeconds" : 5,
+            "periodSeconds" : 10,
+            "successThreshold" : 1,
+            "timeoutSeconds" : 10
+          },
           "name" : "quarkus-jdbc-paramsource",
+          "ports" : [ {
+            "containerPort" : 8080,
+            "name" : "http",
+            "protocol" : "TCP"
+          } ],
+          "readinessProbe" : {
+            "failureThreshold" : 3,
+            "httpGet" : {
+              "path" : "/q/health/ready",
+              "port" : 8080,
+              "scheme" : "HTTP"
+            },
+            "initialDelaySeconds" : 5,
+            "periodSeconds" : 10,
+            "successThreshold" : 1,
+            "timeoutSeconds" : 10
+          },
+          "startupProbe" : {
+            "failureThreshold" : 3,
+            "httpGet" : {
+              "path" : "/q/health/started",
+              "port" : 8080,
+              "scheme" : "HTTP"
+            },
+            "initialDelaySeconds" : 5,
+            "periodSeconds" : 10,
+            "successThreshold" : 1,
+            "timeoutSeconds" : 10
+          },
           "volumeMounts" : [ {
             "mountPath" : "/mnt/app-config-map",
             "name" : "app-config-map",
