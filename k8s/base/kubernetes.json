@@ -65,9 +65,6 @@
                 "fieldPath" : "metadata.namespace"
               }
             }
-          }, {
-            "name" : "SMALLRYE_CONFIG_LOCATIONS",
-            "value" : "/mnt/app-config-map"
           } ],
           "envFrom" : [ {
             "secretRef" : {
@@ -82,7 +79,7 @@
               "name" : "postgres-secret"
             }
           } ],
-          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:sha-cb80607",
+          "image" : "ghcr.io/rmortale/quarkus-jdbc-paramsource:1.0.0-SNAPSHOT",
           "imagePullPolicy" : "Always",
           "livenessProbe" : {
             "failureThreshold" : 3,
@@ -125,21 +122,9 @@
             "periodSeconds" : 10,
             "successThreshold" : 1,
             "timeoutSeconds" : 10
-          },
-          "volumeMounts" : [ {
-            "mountPath" : "/mnt/app-config-map",
-            "name" : "app-config-map",
-            "readOnly" : false
-          } ]
+          }
         } ],
-        "terminationGracePeriodSeconds" : 10,
-        "volumes" : [ {
-          "configMap" : {
-            "name" : "quarkus-jdbc-paramsource-config",
-            "optional" : false
-          },
-          "name" : "app-config-map"
-        } ]
+        "terminationGracePeriodSeconds" : 10
       }
     }
   }
