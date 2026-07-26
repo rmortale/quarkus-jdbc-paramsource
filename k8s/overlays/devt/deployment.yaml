@@ -9,4 +9,4 @@ spec:
         - name: quarkus-jdbc-paramsource
           env:
             - name: MY_ENV_VAR
-              value: "hello"
+              value: "hello DEVT"
