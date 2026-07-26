@@ -1,3 +1,9 @@
 resources:
-  - ./../../base
-  - config-devt.yml
+  - ../../base
+
+patches:
+  - path: deployment.yaml
+
+images:
+  - name: ghcr.io/rmortale/quarkus-jdbc-paramsource
+    newTag: 1.0.0

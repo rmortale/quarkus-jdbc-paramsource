@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quarkus-jdbc-paramsource
+spec:
+  template:
+    spec:
+      containers:
+        - name: quarkus-jdbc-paramsource
+          env:
+            - name: MY_ENV_VAR
+              value: "hello"
