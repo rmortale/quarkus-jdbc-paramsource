@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+  name: quarkus-jdbc-paramsource-prod
+  namespace: argocd
+spec:
+  destination:
+    namespace: prod
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: k8s/overlays/prod
+    repoURL: https://github.com/rmortale/quarkus-jdbc-paramsource.git
+    targetRevision: v0.0.5

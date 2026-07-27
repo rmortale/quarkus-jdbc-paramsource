@@ -1,0 +1,9 @@
+resources:
+  - ../../base
+
+patches:
+  - path: deployment.yaml
+
+images:
+  - name: ghcr.io/rmortale/quarkus-jdbc-paramsource
+    newTag: sha-1811dcd
