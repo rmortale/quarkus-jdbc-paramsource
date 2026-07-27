@@ -9,6 +9,6 @@ spec:
         - name: quarkus-jdbc-paramsource
           env:
             - name: APP_AGENT_CONFIG_ID
-              value: "agent1"
+              value: "agent2"
             - name: APP_AGENT_CONFIG_VERSION
               value: "2.0"
