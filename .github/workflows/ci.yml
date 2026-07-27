@@ -66,12 +66,14 @@ jobs:
             sed -i "s,newTag:.*,newTag:\ sha-${GITHUB_SHA::7}," k8s/overlays/acpt/kustomization.yaml
           fi
 
-#      - uses: EndBug/add-and-commit@v10
-#        with:
-#          default_author: github_actions
+      - uses: EndBug/add-and-commit@v10
+        id: add_and_commit
+        with:
+          default_author: github_actions
 
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_sha: ${{ steps.add_and_commit.outputs.commit_long_sha }}
