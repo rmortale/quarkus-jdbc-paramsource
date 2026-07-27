@@ -13,4 +13,4 @@ spec:
   source:
     path: k8s/overlays/acpt
     repoURL: https://github.com/rmortale/quarkus-jdbc-paramsource.git
-    targetRevision: main
+    targetRevision: v0.0.1
