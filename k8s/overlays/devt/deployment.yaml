@@ -11,4 +11,4 @@ spec:
             - name: APP_AGENT_CONFIG_ID
               value: "agent1"
             - name: APP_AGENT_CONFIG_VERSION
-              value: "2.0"
+              value: "1.0"
