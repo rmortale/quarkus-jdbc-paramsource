@@ -62,6 +62,9 @@ jobs:
       - name: update tags in kustomize files
         run: |
           sed -i "s,newTag:.*,newTag:\ sha-${GITHUB_SHA::7}," k8s/overlays/devt/kustomization.yaml
+          if [ $GITHUB_REF_NAME == 'main' ]; then
+            sed -i "s,newTag:.*,newTag:\ sha-${GITHUB_SHA::7}," k8s/overlays/acpt/kustomization.yaml
+          fi
 
       - uses: EndBug/add-and-commit@v10
         with:

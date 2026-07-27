@@ -14,12 +14,3 @@ spec:
     path: k8s/overlays/acpt
     repoURL: https://github.com/rmortale/quarkus-jdbc-paramsource.git
     targetRevision: main
-    kustomize:
-      patches:
-        - target:
-            kind: Deployment
-            name: quarkus-jdbc-paramsource
-          patch: |-
-            - op: replace
-              path: /spec/template/spec/containers/0/image
-              value: ghcr.io/rmortale/quarkus-jdbc-paramsource:main-92804a9
