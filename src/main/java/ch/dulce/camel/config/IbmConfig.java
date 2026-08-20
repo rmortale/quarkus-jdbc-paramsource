@@ -13,8 +13,8 @@ import org.eclipse.microprofile.config.ConfigProvider;
 
 public class IbmConfig {
 
-  @Inject
-  ConfigRepo paramSource;
+//  @Inject
+//  ConfigRepo paramSource;
 
   @Identifier("ibmConnectionFactory")
   public ConnectionFactory createConnectionFactory() throws JMSException {
@@ -29,8 +29,8 @@ public class IbmConfig {
     return mq;
   }
 
-  @Produces
-  public RouteTemplateParameterSource getRouteTemplateParameterSource() {
-    return paramSource;
-  }
+//  @Produces
+//  public RouteTemplateParameterSource getRouteTemplateParameterSource() {
+//    return paramSource;
+//  }
 }
