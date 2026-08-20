@@ -6,4 +6,4 @@ patches:
 
 images:
   - name: ghcr.io/rmortale/quarkus-jdbc-paramsource
-    newTag: sha-696b0cf
+    newTag: sha-e3e90e8
