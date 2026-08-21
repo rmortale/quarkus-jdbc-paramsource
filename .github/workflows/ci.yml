@@ -5,6 +5,7 @@ on:
     paths-ignore:
       #- "k8s/**"
       - "argocd/**"
+      - "scripts/**"
 
 env:
   REGISTRY: ghcr.io

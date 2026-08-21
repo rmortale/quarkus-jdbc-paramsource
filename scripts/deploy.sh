@@ -5,6 +5,7 @@ DEPLOY_TAG=${2:-main}
 DEPLOY_ACTION=${3:-deploy}
 
 git checkout $DEPLOY_TAG
+git pull
 kubens $DEPLOY_NAMESPACE
 
 if [[ "$DEPLOY_ACTION" == "undeploy" ]]; then
