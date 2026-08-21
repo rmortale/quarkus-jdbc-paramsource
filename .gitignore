@@ -45,3 +45,4 @@ nb-configuration.xml
 .certs/
 /mqjms.log.0
 /mqjms.log.0.lck
+/mails/

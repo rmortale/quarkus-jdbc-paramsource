@@ -1,4 +1,4 @@
-package ch.dulce.camel;
+package ch.dulce.camel.templates;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import org.apache.camel.LoggingLevel;
@@ -6,7 +6,7 @@ import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.apache.camel.support.builder.Namespaces;
 
 @ApplicationScoped
-public class Templates extends EndpointRouteBuilder {
+public class JMSMessage extends EndpointRouteBuilder {
 
   private static final String CACHE_LEVEL_NAME = "CACHE_CONSUMER";
   private static final String DEFAULT_MAX_CONSUMERS = "10";
