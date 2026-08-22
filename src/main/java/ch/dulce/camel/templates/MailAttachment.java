@@ -33,7 +33,6 @@ public class MailAttachment extends EndpointRouteBuilder {
                         .handleDuplicateAttachmentNames("uuidSuffix"))
                 .autoStartup("{{autostartup}}")
                 .split(method(new SplitAttachmentsExpression())).streaming()
-                .to(log("mylogger").showAll(true).multiline(true))
                 .to(file("{{pop3downloaddir}}").fileName("${header.CamelSplitAttachmentId}"));
     }
 
