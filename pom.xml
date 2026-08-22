@@ -54,6 +54,10 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel.quarkus</groupId>
+            <artifactId>camel-quarkus-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel.quarkus</groupId>
             <artifactId>camel-quarkus-stax</artifactId>
         </dependency>
         <dependency>
@@ -78,11 +82,7 @@
             <artifactId>quarkus-fluentjdbc</artifactId>
             <version>1.0.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest-jackson</artifactId>
-        </dependency>
+        
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-kubernetes</artifactId>
