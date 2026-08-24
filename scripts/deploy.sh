@@ -16,6 +16,7 @@ else
   kubectl apply -k k8s/overlays/$DEPLOY_NAMESPACE
 fi
 
+git checkout main
 
 
 

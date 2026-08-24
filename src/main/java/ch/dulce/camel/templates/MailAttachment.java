@@ -20,7 +20,7 @@ public class MailAttachment extends EndpointRouteBuilder {
                 .templateParameter("pop3password")
                 .templateParameter("pop3hostname")
                 .templateParameter("pop3port")
-                .templateParameter("pop3downloaddir", "mails")
+                .templateParameter("pop3downloaddir", "/tmp/mails")
                 .templateParameter("pop3delay", "60000")
                 .templateParameter("pop3fetchsize", "100")
                 .templateParameter("autostartup", "true")
