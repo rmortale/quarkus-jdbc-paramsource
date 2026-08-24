@@ -1,16 +1,19 @@
 package ch.dulce.camel.templates;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import java.nio.file.Path;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.apache.camel.component.mail.SplitAttachmentsExpression;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-/**
- *
- * @author nino
- */
+@ApplicationScoped
 public class MailAttachment extends EndpointRouteBuilder {
 
     public static final String POP3_ATTACH_DOWNLOADER = "pop3AttachmentsDownloader";
+
+    @ConfigProperty(name = "java.io.tmpdir")
+    private String tmpDir;
 
     @Override
     public void configure() throws Exception {
@@ -20,7 +23,7 @@ public class MailAttachment extends EndpointRouteBuilder {
                 .templateParameter("pop3password")
                 .templateParameter("pop3hostname")
                 .templateParameter("pop3port")
-                .templateParameter("pop3downloaddir", "/tmp/mails")
+                .templateParameter("pop3downloaddir", Path.of(tmpDir, "mails").toString())
                 .templateParameter("pop3delay", "60000")
                 .templateParameter("pop3fetchsize", "100")
                 .templateParameter("autostartup", "true")
